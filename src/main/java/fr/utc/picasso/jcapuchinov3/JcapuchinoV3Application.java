@@ -18,14 +18,4 @@ public class JcapuchinoV3Application {
         SpringApplication.run(JcapuchinoV3Application.class, args);
     }
 
-    /* allow cors for * */
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*");
-            }
-        };
-    }
 }
