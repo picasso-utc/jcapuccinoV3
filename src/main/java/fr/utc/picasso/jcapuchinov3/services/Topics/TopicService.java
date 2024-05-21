@@ -5,17 +5,19 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 @Service
 public class TopicService {
-    Map<String, List<Channel>> topicChannels = new HashMap<>();
+    ConcurrentHashMap<String, ConcurrentLinkedQueue<Channel>> topicChannels = new ConcurrentHashMap<>();
 
     public TopicService() {
     }
 
     public void addChannel(String topic, Channel channel) {
         if (!topicChannels.containsKey(topic)) {
-            topicChannels.put(topic, new java.util.ArrayList<>());
+            topicChannels.put(topic, new ConcurrentLinkedQueue<>());
         }
         topicChannels.get(topic).add(channel);
     }
